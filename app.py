@@ -2,7 +2,7 @@ from flask import Flask, jsonify, abort, make_response, request
 from tinydb import TinyDB, Query
 import shortuuid
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
 db = TinyDB('messages.json')
 
 @app.errorhandler(404)
@@ -32,10 +32,10 @@ def update_text(uid):
     db.update({'text':request.args.get('text','')},message.id == uid)
     return get_text(uid)
 
-@app.route('/',methods=['GET'])
-@app.route('/index.html',methods=['GET'])
+@app.route('/')
+@app.route('/index.html')
 def index():
-    return app.send_static_file('index.html')
+   return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
