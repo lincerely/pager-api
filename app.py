@@ -32,7 +32,8 @@ def update_text(uid):
     db.update({'text':request.args.get('text','')},message.id == uid)
     return get_text(uid)
 
-@app.route('/')
+@app.route('/',methods=['GET'])
+@app.route('/index.html',methods=['GET'])
 def index():
     return app.send_static_file('index.html')
 
