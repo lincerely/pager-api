@@ -18,16 +18,16 @@ def get_text(uid):
         abort(404)
     return jsonify(msg)
 
-@app.route('/pager/new', methods=['GET'])
+@app.route('/pager/new', methods=['GET','PUT','POST'])
 def create_user():
     msg = {
         "id":shortuuid.uuid(),
-        "text": "No messsage"
+        "text":request.args.get('text','')
     }
     db.insert(msg)
     return jsonify(msg),201
 
-@app.route('/pager/update/<string:uid>', methods=['PUT','POST','GET'])
+@app.route('/pager/<string:uid>', methods=['PUT','POST','GET'])
 def update_text(uid):
     message = Query()
     db.update({'text':request.args.get('text','')},message.id == uid)
