@@ -1,5 +1,4 @@
-from flask import Flask, jsonify, abort, make_response, request,
-render_template
+from flask import Flask, jsonify, abort, make_response, request, render_template
 from tinydb import TinyDB, Query
 import shortuuid
 
